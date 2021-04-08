@@ -2,10 +2,10 @@
 
 namespace WalkerChiu\MorphRank\Models\Entities;
 
-use WalkerChiu\Core\Models\Entities\Entity;
 use WalkerChiu\Core\Models\Entities\LangTrait;
+use WalkerChiu\Core\Models\Entities\UuidEntity;
 
-class Level extends Entity
+class Level extends UuidEntity
 {
     use LangTrait;
 

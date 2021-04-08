@@ -9,17 +9,18 @@ class CreateWkMorphRankTable extends Migration
     public function up()
     {
         Schema::create(config('wk-core.table.morph-rank.levels'), function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->nullableMorphs('host');
+            $table->uuid('id');
+            $table->nullableUuidMorphs('host');
             $table->string('serial')->nullable();
             $table->string('identifier');
-            $table->morphs('morph');
+            $table->uuidMorphs('morph');
             $table->unsignedBigInteger('order')->nullable();
             $table->boolean('is_enabled')->default(1);
 
             $table->timestampsTz();
             $table->softDeletes();
 
+            $table->primary('id');
             $table->index('serial');
             $table->index('identifier');
             $table->index('is_enabled');
@@ -27,9 +28,9 @@ class CreateWkMorphRankTable extends Migration
         });
         if (!config('wk-morph-rank.onoff.core-lang_core')) {
             Schema::create(config('wk-core.table.morph-rank.levels_lang'), function (Blueprint $table) {
-                $table->bigIncrements('id');
-                $table->morphs('morph');
-                $table->unsignedBigInteger('user_id')->nullable();
+                $table->uuid('id');
+                $table->uuidMorphs('morph');
+                $table->uuid('user_id')->nullable();
                 $table->string('code');
                 $table->string('key');
                 $table->text('value')->nullable();
@@ -42,21 +43,24 @@ class CreateWkMorphRankTable extends Migration
                     ->on(config('wk-core.table.user'))
                     ->onDelete('set null')
                     ->onUpdate('cascade');
+
+                $table->primary('id');
             });
         }
 
         Schema::create(config('wk-core.table.morph-rank.statuses'), function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->nullableMorphs('host');
+            $table->uuid('id');
+            $table->nullableUuidMorphs('host');
             $table->string('serial')->nullable();
             $table->string('identifier');
-            $table->morphs('morph');
+            $table->uuidMorphs('morph');
             $table->unsignedBigInteger('order')->nullable();
             $table->boolean('is_enabled')->default(1);
 
             $table->timestampsTz();
             $table->softDeletes();
 
+            $table->primary('id');
             $table->index('serial');
             $table->index('identifier');
             $table->index('is_enabled');
@@ -64,9 +68,9 @@ class CreateWkMorphRankTable extends Migration
         });
         if (!config('wk-morph-rank.onoff.core-lang_core')) {
             Schema::create(config('wk-core.table.morph-rank.statuses_lang'), function (Blueprint $table) {
-                $table->bigIncrements('id');
-                $table->morphs('morph');
-                $table->unsignedBigInteger('user_id')->nullable();
+                $table->uuid('id');
+                $table->uuidMorphs('morph');
+                $table->uuid('user_id')->nullable();
                 $table->string('code');
                 $table->string('key');
                 $table->text('value')->nullable();
@@ -79,6 +83,8 @@ class CreateWkMorphRankTable extends Migration
                     ->on(config('wk-core.table.user'))
                     ->onDelete('set null')
                     ->onUpdate('cascade');
+
+                $table->primary('id');
             });
         }
     }

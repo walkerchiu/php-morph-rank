@@ -32,11 +32,11 @@ class StatusDeleteFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'         => ['required','integer','min:1','exists:'.config('wk-core.table.morph-rank.statuses').',id'],
+            'id'         => ['required','string','exists:'.config('wk-core.table.morph-rank.statuses').',id'],
             'host_type'  => 'required_with:host_id|string',
-            'host_id'    => 'required_with:host_type|integer|min:1',
+            'host_id'    => 'required_with:host_type|string',
             'morph_type' => 'required|string',
-            'morph_id'   => 'required|integer|min:1'
+            'morph_id'   => 'required|string'
         ];
     }
 
@@ -49,19 +49,16 @@ class StatusDeleteFormRequest extends FormRequest
     {
         return [
             'id.required'             => trans('php-core::validation.required'),
-            'id.integer'              => trans('php-core::validation.integer'),
-            'id.min'                  => trans('php-core::validation.min'),
+            'id.string'               => trans('php-core::validation.string'),
             'id.exists'               => trans('php-core::validation.exists'),
             'host_type.required_with' => trans('php-core::validation.required_with'),
             'host_type.string'        => trans('php-core::validation.string'),
             'host_id.required_with'   => trans('php-core::validation.required_with'),
-            'host_id.integer'         => trans('php-core::validation.integer'),
-            'host_id.min'             => trans('php-core::validation.min'),
+            'host_id.string'          => trans('php-core::validation.string'),
             'morph_type.required'     => trans('php-core::validation.required'),
             'morph_type.string'       => trans('php-core::validation.string'),
             'morph_id.required'       => trans('php-core::validation.required'),
-            'morph_id.integer'        => trans('php-core::validation.integer'),
-            'morph_id.min'            => trans('php-core::validation.min')
+            'morph_id.string'         => trans('php-core::validation.string')
         ];
     }
 

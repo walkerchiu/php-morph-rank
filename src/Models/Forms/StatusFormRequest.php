@@ -17,7 +17,7 @@ class StatusFormRequest extends FormRequest
         $request = Request::instance();
         $data = $this->all();
         if ($request->isMethod('put') && empty($data['id']) && isset($request->id)) {
-            $data['id'] = (int) $request->id;
+            $data['id'] = (string) $request->id;
             $this->getInputSource()->replace($data);
         }
 
@@ -51,11 +51,11 @@ class StatusFormRequest extends FormRequest
     {
         $rules = [
             'host_type'   => 'required_with:host_id|string',
-            'host_id'     => 'required_with:host_type|integer|min:1',
+            'host_id'     => 'required_with:host_type|string',
             'serial'      => '',
             'identifier'  => 'required|string|max:255',
             'morph_type'  => 'required|string',
-            'morph_id'    => 'required|integer|min:1',
+            'morph_id'    => 'required|string',
             'is_enabled'  => 'required|boolean',
 
             'name'        => 'required|string|max:255',
@@ -64,9 +64,9 @@ class StatusFormRequest extends FormRequest
 
         $request = Request::instance();
         if ($request->isMethod('put') && isset($request->id)) {
-            $rules = array_merge($rules, ['id' => ['required','integer','min:1','exists:'.config('wk-core.table.morph-rank.statuses').',id']]);
+            $rules = array_merge($rules, ['id' => ['required','string','exists:'.config('wk-core.table.morph-rank.statuses').',id']]);
         } elseif ($request->isMethod('post')) {
-            $rules = array_merge($rules, ['id' => ['nullable','integer','min:1','exists:'.config('wk-core.table.morph-rank.statuses').',id']]);
+            $rules = array_merge($rules, ['id' => ['nullable','string','exists:'.config('wk-core.table.morph-rank.statuses').',id']]);
         }
 
         return $rules;
@@ -80,21 +80,19 @@ class StatusFormRequest extends FormRequest
     public function messages()
     {
         return [
-            'id.integer'              => trans('php-core::validation.integer'),
-            'id.min'                  => trans('php-core::validation.min'),
+            'id.required'             => trans('php-core::validation.required'),
+            'id.string'               => trans('php-core::validation.string'),
             'id.exists'               => trans('php-core::validation.exists'),
             'host_type.required_with' => trans('php-core::validation.required_with'),
             'host_type.string'        => trans('php-core::validation.string'),
             'host_id.required_with'   => trans('php-core::validation.required_with'),
-            'host_id.integer'         => trans('php-core::validation.integer'),
-            'host_id.min'             => trans('php-core::validation.min'),
+            'host_id.string'          => trans('php-core::validation.string'),
             'identifier.required'     => trans('php-core::validation.required'),
             'identifier.max'          => trans('php-core::validation.max'),
             'morph_type.required'     => trans('php-core::validation.required'),
             'morph_type.string'       => trans('php-core::validation.string'),
             'morph_id.required'       => trans('php-core::validation.required'),
-            'morph_id.integer'        => trans('php-core::validation.integer'),
-            'morph_id.min'            => trans('php-core::validation.min'),
+            'morph_id.string'         => trans('php-core::validation.string'),
             'is_enabled.required'     => trans('php-core::validation.required'),
             'is_enabled.boolean'      => trans('php-core::validation.boolean'),
 

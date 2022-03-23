@@ -1,0 +1,38 @@
+{
+    "name": "walkerchiu/php-morph-rank",
+    "type": "library",
+    "authors": [
+        {
+            "name":  "Walker Chiu",
+            "email": "chenjen.chiou@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.3",
+        "walkerchiu/php-core": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "WalkerChiu\\MorphRank\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "WalkerChiu\\MorphRank\\MorphRankServiceProvider"
+            ],
+            "aliases": {
+                "Level":  "WalkerChiu\\MorphRank\\Models\\Entities\\Level",
+                "Status": "WalkerChiu\\MorphRank\\Models\\Entities\\Status"
+            }
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    }
+}

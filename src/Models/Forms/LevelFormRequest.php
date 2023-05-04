@@ -129,11 +129,11 @@ class LevelFormRequest extends FormRequest
                 && isset($data['host_id'])
             ) {
                 if (
-                    config('wk-morph-rank.onoff.site')
-                    && !empty(config('wk-core.class.site.site'))
-                    && $data['host_type'] == config('wk-core.class.site.site')
+                    config('wk-morph-rank.onoff.site-mall')
+                    && !empty(config('wk-core.class.site-mall.site'))
+                    && $data['host_type'] == config('wk-core.class.site-mall.site')
                 ) {
-                    $result = DB::table(config('wk-core.table.site.sites'))
+                    $result = DB::table(config('wk-core.table.site-mall.sites'))
                                 ->where('id', $data['host_id'])
                                 ->exists();
                     if (!$result)
@@ -155,11 +155,11 @@ class LevelFormRequest extends FormRequest
                 && isset($data['morph_id'])
             ) {
                 if (
-                    config('wk-morph-rank.onoff.site')
-                    && !empty(config('wk-core.class.site.site'))
-                    && $data['morph_type'] == config('wk-core.class.site.site')
+                    config('wk-morph-rank.onoff.site-mall')
+                    && !empty(config('wk-core.class.site-mall.site'))
+                    && $data['morph_type'] == config('wk-core.class.site-mall.site')
                 ) {
-                    $result = DB::table(config('wk-core.table.site.sites'))
+                    $result = DB::table(config('wk-core.table.site-mall.sites'))
                                 ->where('id', $data['morph_id'])
                                 ->exists();
                     if (!$result)

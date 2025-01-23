@@ -1,0 +1,22 @@
+<phpunit>
+
+    <testsuites>
+        <testsuite name="Unit">
+            <directory suffix="LevelTest.php">./tests/Entities</directory>
+            <directory suffix="LevelLangTest.php">./tests/Entities</directory>
+            <directory suffix="LevelFormRequestTest.php">./tests/Forms</directory>
+            <directory suffix="StatusTest.php">./tests/Entities</directory>
+            <directory suffix="StatusLangTest.php">./tests/Entities</directory>
+            <directory suffix="StatusFormRequestTest.php">./tests/Forms</directory>
+        </testsuite>
+        <testsuite name="Feature">
+            <directory suffix="LevelRepositoryTest.php">./tests/Repositories</directory>
+            <directory suffix="StatusRepositoryTest.php">./tests/Repositories</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <env name="DB_CONNECTION" value="sqlite"/>
+        <env name="DB_DATABASE" value=":memory:"/>
+    </php>
+
+</phpunit>
